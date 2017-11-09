@@ -15,3 +15,16 @@ def estimate_mvnormal(observations):
     cov = np.cov(observations, rowvar=False)
 
     return mu, cov
+
+
+def lognormal_mode(lognorm_params):
+    '''
+    Given the estimated parameters of log-normal distribution (s, loc, scale),
+    compute its mode (x with the peak value of PDF)
+    '''
+
+    s, loc, scale = lognorm_params
+
+    mu = np.log(scale)
+
+    return np.exp(mu - s ** 2) + loc

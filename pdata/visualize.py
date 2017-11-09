@@ -63,3 +63,11 @@ def get_axis_extent(grid_x, grid_y):
     top = grid_y[0, 0]
 
     return left, right, bottom, top
+
+def plot_frozen_distrib(x0, x1, distrib, linspace_num=200, **plot_kvargs):
+    '''
+    Visualize 1D continuous distribution on the given domain range
+    '''
+
+    x = np.linspace(x0, x1, num=linspace_num)
+    plt.plot(x, distrib.pdf(x), **plot_kvargs)
