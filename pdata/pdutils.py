@@ -5,7 +5,7 @@ import numpy as np
 def pd_iterate_over_rows(df):
     """
     Iterate over rows of a dataframe
-    where is row is a Series object
+    where a row is a Series object
     """
 
     for i in range(len(df)):
@@ -15,9 +15,10 @@ def pd_iterate_over_rows(df):
 
 def pd_isin_multiple_cols(df1, df2):
     """
-    For all columns in df2,
-    select a subset of df1 with the matched values
-    in the columns with the same names
+    For all columns in df2 
+    and columns of df1 having the same names,
+    select a subset of df1 consisting of rows
+    that exist in df2.
     """
 
     mask = np.ones(len(df1), dtype=bool)
@@ -35,9 +36,26 @@ def pd_content_in_columns_is_identical(df1, df2, colnames):
     Check whether data in the selected 
     identically-named columns in two dataframes
     is identical. 
+
+    Will only work for the dataframes with a common index. 
+    Otherwise, a ValueError is raised:
+    "Can only compare identically-labeled DataFrame objects". 
     """
 
     common_colnames = set(df1.columns).intersection(df2.columns)
     assert set(colnames).issubset(common_colnames)
 
     return np.all(df1[colnames] == df2[colnames])
+
+
+def pd_col_is_identical_no_index(df1, df2, colname):
+    """
+    Check whether an identically-named column in 
+    two dataframes has the same data. 
+    The function disregards dataframe index. 
+    """
+
+    c1 = np.array(df1[colname])
+    c2 = np.array(df2[colname])
+
+    return np.all(c1 == c2)
