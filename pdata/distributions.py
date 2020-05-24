@@ -1,5 +1,6 @@
 import numpy as np
 
+
 def estimate_mvnormal(observations):
     '''
     Perform maximum-likelihood estimation of a multivariate normal

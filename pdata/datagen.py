@@ -1,5 +1,6 @@
 import numpy as np
 
+
 def generate_mvnormal_clusters(mus, covs, sizes, seed=None):
 
     if seed is not None:

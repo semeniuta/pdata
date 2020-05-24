@@ -51,6 +51,7 @@ def mvnormal_distrib_map(mu, cov, observations, padding_factor=0.2, grid_prec=0.
 
     return grid_x, grid_y, distrib_map
 
+
 def get_axis_extent(grid_x, grid_y):
     """
     Get a tuple of (left, right, bottom, top)
@@ -65,6 +66,7 @@ def get_axis_extent(grid_x, grid_y):
     top = grid_y[0, 0]
 
     return left, right, bottom, top
+
 
 def plot_frozen_distrib(x0, x1, distrib, linspace_num=200, fill_alpha=0.4, **plot_kvargs):
     """

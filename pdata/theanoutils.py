@@ -2,6 +2,7 @@ import math
 import numpy as np
 import theano.tensor as tt
 
+
 def create_mask_matrix(shape, indices):
     """
     Create mask matrix of the specified shape with 1's in positions defined in `indices`
