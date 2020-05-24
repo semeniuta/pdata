@@ -2,17 +2,6 @@ import pandas as pd
 import numpy as np
 
 
-def pd_iterate_over_rows(df):
-    """
-    Iterate over rows of a dataframe
-    where a row is a Series object
-    """
-
-    for i in range(len(df)):
-        row = df_new.iloc[i]
-        yield row
-
-
 def pd_isin_multiple_cols(df1, df2):
     """
     For all columns in df2 
