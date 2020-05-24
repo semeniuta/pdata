@@ -3,14 +3,14 @@ import numpy as np
 import theano.tensor as tt
 
 def create_mask_matrix(shape, indices):
-    '''
+    """
     Create mask matrix of the specified shape with 1's in positions defined in `indices`
     and 0's elsewhere
 
     :param shape: tuple of integers
     :param indices: iterable of tuples
     :return: mask matrix
-    '''
+    """
 
     m = np.zeros(shape)
     for i, j in indices:
@@ -19,14 +19,14 @@ def create_mask_matrix(shape, indices):
 
 
 def create_mask_vector(length, indices):
-    '''
+    """
     Create mask vector of the specified length with 1's in positions defined in `indices`
     and 0's elsewhere
 
     :param length: integer
     :param indices: iterable of integers
     :return: mask vector
-    '''
+    """
 
     v = np.zeros(length)
     for i in indices:
@@ -35,7 +35,7 @@ def create_mask_vector(length, indices):
 
 
 def fill_vector(*args):
-    '''
+    """
     Create a vector as a Theano tensor object.
     In the context of a PyMC3 model, can be used to create a vectorial
     deterministic variable from other model variables
@@ -43,7 +43,7 @@ def fill_vector(*args):
     :param args: sequence of objects representing scalars
      and corresponding to the elements of the constructed vector
     :return: vector as a Theano tensor object, formed from elements of `*args`
-    '''
+    """
 
     n = len(args)
 
@@ -56,14 +56,14 @@ def fill_vector(*args):
 
 
 def fill_correlation_matrix(c_vec):
-    '''
+    """
     Create a Theano tensor object representing a correlation matrix
     of a multivariate normal distribution.
 
     :param c_vec: PyMC3 model variable corresponding to the `LKJCorr` prior
                   on  elements of the correlation matrix
     :return: correlation matrix as a Theano tensor object
-    '''
+    """
 
     n = c_vec.tag.test_value.shape[0]
     n_layers = n - 1
@@ -89,14 +89,14 @@ def fill_correlation_matrix(c_vec):
 
 
 def fill_cov_matrix(*args):
-    '''
+    """
     Create a Theano tensor object representing a covariance matrix
     of a multivariate normal distribution.
 
     :param args: PyMC3 variables, each representing upper triagular elements
                  of a covariance matrix
     :return: covariance matrix as a Theano tensor object
-    '''
+    """
 
     n = len(args)
     s = (math.sqrt(8 * n + 1) - 1) / 2
