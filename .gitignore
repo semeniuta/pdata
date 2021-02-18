@@ -1,5 +1,9 @@
 *~*
 *.pyc
-*.ipynb_checkpoints*
-*.idea/*
+*.ipynb_checkpoints
+*.idea
 *.DS_Store
+*.egg-info
+.eggs*
+build
+dist
