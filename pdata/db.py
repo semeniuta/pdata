@@ -1,5 +1,6 @@
 import pandas as pd
 from sqlalchemy import create_engine
+import sqlite3
 
 
 class MySQLConnection:
@@ -15,5 +16,16 @@ class MySQLConnection:
 
         return pd.read_sql(q, self.conn)
 
-    
 
+class SQLiteDatabase:
+
+    def __init__(self, db_path):
+        self.db_path = db_path
+
+    def query(self, q):
+
+        conn = sqlite3.connect(self.db_path)
+        df = pd.read_sql_query(q, conn)
+        conn.close()
+
+        return df
