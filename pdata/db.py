@@ -3,14 +3,20 @@ from sqlalchemy import create_engine
 import sqlite3
 
 
+def create_mysql_engine(host, user, password, db):
+
+    url_template = 'mysql+mysqlconnector://{}:{}@{}/{}?charset=utf8'
+    conn_str = url_template.format(user, password, host, db)
+    
+    return create_engine(conn_str, echo=False)
+
+
 class MySQLConnection:
 
     def __init__(self, host, user, password, db):
 
-        conn_str = 'mysql+mysqlconnector://{}:{}@{}/{}?charset=utf8'.format(user, password, host, db)
-        engine = create_engine(conn_str, echo=False)
-
-        self.conn = engine.raw_connection()
+        self.engine = create_mysql_engine(host, user, password, db)
+        self.conn = self.engine.raw_connection()
 
     def query(self, q):
 
