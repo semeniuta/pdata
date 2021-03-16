@@ -43,7 +43,7 @@ def run_gscv(X_shuffled, y_shuffled, setup, score_func):
 
     for method_name, method_params in setup.items():
 
-        gs = GridSearchCV(scoring=score_func, cv=4, iid=False, **method_params)
+        gs = GridSearchCV(scoring=score_func, cv=4, **method_params)
         gs.fit(X_shuffled, y_shuffled)
 
         result[method_name] = gs
