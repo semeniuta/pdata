@@ -90,7 +90,7 @@ def handle_fig_and_ax(fig, subplot_pos, projection=None):
         fig = plt.figure()
 
     if subplot_pos is None:
-        ax = plt.gca(projection=projection)
+        ax = plt.axes(projection=projection)
     else:
         ax = fig.add_subplot(subplot_pos, projection=projection)
 
