@@ -11,18 +11,6 @@ def create_mysql_engine(host, user, password, db):
     return create_engine(conn_str, echo=False)
 
 
-class MySQLConnection:
-
-    def __init__(self, host, user, password, db):
-
-        self.engine = create_mysql_engine(host, user, password, db)
-        self.conn = self.engine.raw_connection()
-
-    def query(self, q):
-
-        return pd.read_sql(q, self.conn)
-
-
 class SQLiteDatabase:
 
     def __init__(self, db_path):
