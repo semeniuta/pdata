@@ -31,20 +31,49 @@ class SQLiteDatabase:
 
 class SQLSelectQuery:
 
-    def __init__(self, what, relations, conditions, name=None):
+    def __init__(self, what, relations, conditions=None):
         
         self.what = what
         self.relations = relations
         self.conditions = conditions
-        self.name = name
+        
+        self.order_cols = None
+        self.order_asc = None
+
+        self.limit = None
+
+        self.name = None
+        
+    def order_by(self, colnames, asc=True):
+        
+        self.order_cols = colnames
+        self.order_asc = asc
+
+        return self
+
+    def set_name(self, name):
+        self.name = name    
+        return self
+
 
     def __str__(self):
 
         what_s = comma_separated_string(self.what)
         relations_s = comma_separated_string(self.relations)
-        conditions_s = comma_separated_string(self.conditions)
 
-        q = 'SELECT {} FROM {} WHERE {}'.format(what_s, relations_s, conditions_s)
+        q = 'SELECT {} FROM {}'.format(what_s, relations_s)
+
+        if self.conditions is not None:
+            
+            conditions_s = comma_separated_string(self.conditions)
+            q += ' WHERE {}'.format(conditions_s)
+
+        if self.order_cols is not None:
+
+            order_cols_s = comma_separated_string(self.order_cols)
+            order = 'ASC' if self.order_asc else 'DESC'
+            
+            q += ' ORDER BY {} {}'.format(order_cols_s, order)
 
         if self.name is not None:
             q = '({}) {}'.format(q, self.name)
