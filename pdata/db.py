@@ -40,7 +40,7 @@ class SQLSelectQuery:
         self.order_cols = None
         self.order_asc = None
 
-        self.limit = None
+        self.limit_n = None
 
         self.name = None
         
@@ -55,6 +55,9 @@ class SQLSelectQuery:
         self.name = name    
         return self
 
+    def limit(self, n):
+        self.limit_n = n
+        return self
 
     def __str__(self):
 
@@ -74,6 +77,9 @@ class SQLSelectQuery:
             order = 'ASC' if self.order_asc else 'DESC'
             
             q += ' ORDER BY {} {}'.format(order_cols_s, order)
+
+        if self.limit_n is not None:
+            q += ' LIMIT {:d}'.format(self.limit_n)
 
         if self.name is not None:
             q = '({}) {}'.format(q, self.name)
