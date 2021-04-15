@@ -31,6 +31,10 @@ class SQLiteDatabase:
 
 class SQLSelectQuery:
 
+    class NoNameException(Exception):
+        def __init__(self):
+            super().__init__('Query has not been given a name')
+
     def __init__(self, what, relations, conditions=None):
         
         self.what = what
@@ -59,6 +63,21 @@ class SQLSelectQuery:
         self.limit_n = n
         return self
 
+    def as_relation(self):
+        self._check_no_name()
+        return '({}) {}'.format(str(self), self.name)
+
+    def as_named_value(self):
+        self._check_no_name()
+        return '({}) as {}'.format(tr(self), self.name)
+
+    def as_value(self):
+        return '({})'.format(str(self))
+
+    def _check_no_name(self):
+        if self.name is None:
+            raise SQLSelectQuery.NoNameException()
+
     def __str__(self):
 
         what_s = comma_separated_string(self.what)
@@ -80,8 +99,5 @@ class SQLSelectQuery:
 
         if self.limit_n is not None:
             q += ' LIMIT {:d}'.format(self.limit_n)
-
-        if self.name is not None:
-            q = '({}) {}'.format(q, self.name)
 
         return q
