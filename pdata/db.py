@@ -15,6 +15,15 @@ def create_mysql_engine(host, user, password, db):
     return create_engine(conn_str, echo=False)
 
 
+def read_sql_with_elapsed_time(query, conn):
+
+    t0 = time.perf_counter()
+    df = pd.read_sql(query, conn)
+    t1 = time.perf_counter()
+
+    return df, t1 - t0
+
+
 class SQLiteDatabase:
 
     def __init__(self, db_path):
