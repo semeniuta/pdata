@@ -1,6 +1,7 @@
 import pandas as pd
 from sqlalchemy import create_engine
 import sqlite3
+import time
 
 
 def comma_separated_string(values):
