@@ -48,3 +48,26 @@ def pd_col_is_identical_no_index(df1, df2, colname):
     c2 = np.array(df2[colname])
 
     return np.all(c1 == c2)
+
+
+def pd_find_switchpoints(target_series):
+    """
+    Given a Pandas Series (or a 1D NumPy array),
+    return indices using (0 ... n-1) indexing
+    that correspond to cases when a value 
+    in the original Series changes.
+
+    As such, index i in the output NumPy array
+    shows that target_series[i - 1] != target_series[i].
+
+    The output array will always contain 0 as the first 
+    element. 
+    """
+
+    uniq, indices = np.unique(target_series, return_inverse=True)
+
+    diff = np.diff(indices)
+
+    switchpoints = np.argwhere(diff != 0).reshape(-1)
+
+    return np.concatenate((np.zeros(1, dtype=int), switchpoints + 1))
