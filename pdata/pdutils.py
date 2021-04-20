@@ -71,3 +71,15 @@ def pd_find_switchpoints(target_series):
     switchpoints = np.argwhere(diff != 0).reshape(-1)
 
     return np.concatenate((np.zeros(1, dtype=int), switchpoints + 1))
+
+
+def pd_get_cols_subset_by_template(df, template, rng):
+    """
+    Select certain columns from the supplied dataframe
+    corresponding to a template like "X_{}"
+    and a range values (e.g. ingegers like range(1, 4)) 
+    inserted into the template. 
+    """
+
+    colnames = [template.format(el) for el in rng]
+    return df[colnames]
