@@ -45,11 +45,11 @@ class SQLSelectQuery:
         def __init__(self):
             super().__init__('Query has not been given a name')
 
-    def __init__(self, what, relations, conditions=None):
+    def __init__(self, what, rel, cond=None):
         
-        self.what = what
-        self.relations = relations
-        self.conditions = conditions
+        self.what = self._handle_input(what)
+        self.relations = self._handle_input(rel)
+        self.conditions = self._handle_input(cond)
         
         self.order_cols = None
         self.order_asc = None
@@ -60,7 +60,7 @@ class SQLSelectQuery:
         
     def order_by(self, colnames, asc=True):
         
-        self.order_cols = colnames
+        self.order_cols = self._handle_input(colnames)
         self.order_asc = asc
 
         return self
@@ -73,16 +73,21 @@ class SQLSelectQuery:
         self.limit_n = n
         return self
 
-    def as_relation(self):
+    def as_named_relation(self):
         self._check_no_name()
         return '({}) {}'.format(str(self), self.name)
 
     def as_named_value(self):
         self._check_no_name()
-        return '({}) as {}'.format(tr(self), self.name)
+        return '({}) as {}'.format(str(self), self.name)
 
     def as_value(self):
         return '({})'.format(str(self))
+
+    def _handle_input(self, val):
+        if type(val) == str:
+            return [val]
+        return val
 
     def _check_no_name(self):
         if self.name is None:
