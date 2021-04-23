@@ -2,6 +2,8 @@ import numpy as np
 import pandas as pd
 from sklearn.model_selection import cross_val_score
 from sklearn.model_selection import GridSearchCV
+from sklearn.preprocessing import StandardScaler
+from sklearn.decomposition import PCA
 
 
 def get_model_name(clf):
@@ -80,3 +82,17 @@ def gather_best_scores_for_all_gscv(gscv_res):
     df['share_with_best'] = df['n_with_best'] / df['grid_size']
 
     return df
+
+
+class MLData:
+
+    def __init__(self, df, pca_n_components=2):
+
+        self.X = df
+
+        self._scaler = StandardScaler()
+        self.X_scaled = self._scaler.fit_transform(self.X)
+
+        self._pca = PCA(n_components=pca_n_components)
+        self._pca.fit(self.X_scaled)
+        self.X_pca = self._pca.transform(self.X_scaled)
