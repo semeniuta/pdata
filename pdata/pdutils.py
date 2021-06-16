@@ -83,3 +83,26 @@ def pd_get_cols_subset_by_template(df, template, rng):
 
     colnames = [template.format(el) for el in rng]
     return df[colnames]
+
+
+def pd_cols_with_identical_values(df):
+    """
+    Given a dataframe, return a dictionary mapping
+    column names to a single value for columns
+    containing an identical value.
+    """
+
+    n = len(df)
+
+    res = dict()
+
+    for colname in df.columns:
+    
+        col = df[colname]
+        first_val = col.iloc[0]
+        all_same = (np.sum(col == first_val) == n)
+        
+        if all_same:
+            res[colname] = first_val
+
+    return res
