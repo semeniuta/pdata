@@ -96,3 +96,8 @@ class MLData:
         self._pca = PCA(n_components=pca_n_components)
         self._pca.fit(self.X_scaled)
         self.X_pca = self._pca.transform(self.X_scaled)
+
+    def summarize_importances(self, importances):
+
+        d = dict(zip(self.X.columns, importances))
+        return pd.Series(d).sort_values(ascending=False)
