@@ -91,7 +91,8 @@ class MLData:
         self.X = df
 
         self._scaler = StandardScaler()
-        self.X_scaled = self._scaler.fit_transform(self.X)
+        scaled = self._scaler.fit_transform(self.X)
+        self.X_scaled = pd.DataFrame(scaled, columns=df.columns, index=df.index)
 
         self._pca = PCA(n_components=pca_n_components)
         self._pca.fit(self.X_scaled)
