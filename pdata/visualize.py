@@ -123,3 +123,31 @@ def plot_grad_as_vector_field(x_range, y_range, U, V, fig=None, subplot_pos=None
 
     ax.set_aspect('equal')
     q = ax.quiver(x_range, y_range, U, V, **quiver_kwargs)
+
+
+class CompactPlotter:
+
+    def __init__(self, plot_func, figsize, n_cols=2):
+        self.plot_func = plot_func
+        self.figsize = figsize
+        self.n_cols = n_cols
+
+    def plot(self, elements, **plot_func_kwargs):
+
+        n = len(elements)
+
+        for start in range(0, n, self.n_cols):
+
+            plt.figure(figsize=self.figsize)
+            
+            for i in range(self.n_cols):
+
+                if start + i >= n:
+                    break
+
+                idx = start + i
+
+                ax = plt.subplot(1, self.n_cols, i+1)
+
+                element = elements[idx]
+                self.plot_func(element, **plot_func_kwargs)
