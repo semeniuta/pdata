@@ -141,6 +141,15 @@ def compact_plotter(n, figsize, n_cols=2):
             yield ax
 
 
+def create_compact_plotter(elements, **kwargs):
+    
+    n = len(elements)
+    cp = compact_plotter(n, **kwargs)
+
+    return zip(elements, cp)
+
+
+
 class CompactPlotter:
 
     def __init__(self, plot_func, figsize, n_cols=2):
