@@ -119,12 +119,9 @@ def plot_contour(x, y, z, ax=None, **contourf_kwargs):
     plt.colorbar(cnt, ax=ax)
 
 
-def plot_grad_as_vector_field(x_range, y_range, U, V, fig=None, subplot_pos=None, **quiver_kwargs):
-
-    fig, ax = handle_fig_and_ax(fig, subplot_pos)
-
-    ax.set_aspect('equal')
-    q = ax.quiver(x_range, y_range, U, V, **quiver_kwargs)
+def plot_grad_as_vector_field(x_range, y_range, grad_x, grad_y, ax, **quiver_kwargs):
+    
+    ax.quiver(x_range, y_range, grad_x, grad_y, **quiver_kwargs)
 
 
 def compact_plotter(n, figsize, n_cols=2):
