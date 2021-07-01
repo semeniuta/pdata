@@ -58,7 +58,26 @@ def prepare_Xy(X_1, X_0):
     return X, y
 
 
-def run_gscv(X_shuffled, y_shuffled, setup, score_func):
+def run_gscv(X_shuffled, y_shuffled, setup, score_func=None):
+    """
+    Run GridSearchCV on the given estimator setup and 
+    a custom scoring function. 
+
+    The setup is a multi-level dictionary of the following format:
+    the highest-level keys represent application-specific names of 
+    each estimator, e.g. "random_forest", or "my_great_estimator"; 
+    the values are dictionaries representing parameters of each 
+    estimator specified as kwargs of GridSearchCV 
+    (mainly estimator and param_grid).
+
+    The scoring function can be set to None (default behavior)
+    or defined as a function taking (y_true, y_pred) and returning
+    a floating-point score.
+
+    The function returns a dictionary with the keys corresponding to 
+    the highest-level keys of setup and values being the resulting 
+    GridSearchCV objects
+    """
 
     result = dict()
 
