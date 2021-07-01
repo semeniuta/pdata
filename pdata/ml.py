@@ -6,8 +6,13 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
 
 
-def get_model_name(clf):
-    return str(clf.__class__)[1:-1].split()[1][1:-1].split('.')[-1]
+def get_model_name(estimator):
+    """
+    Given an estimator object, return a string
+    with the name of its class.
+    """
+
+    return str(estimator.__class__)[1:-1].split()[1][1:-1].split('.')[-1]
 
 
 def cross_val_for_estimators(estimators, X, y, **cross_val_score_kwargs):
