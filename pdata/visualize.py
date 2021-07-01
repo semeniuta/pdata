@@ -108,9 +108,10 @@ def plot_surface(x, y, z, fig=None, subplot_pos=None, **surface_kwargs):
     ax.set_zlabel('z')
 
 
-def plot_contour(x, y, z, fig=None, subplot_pos=None, **contourf_kwargs):
+def plot_contour(x, y, z, ax=None, **contourf_kwargs):
 
-    fig, ax = handle_fig_and_ax(fig, subplot_pos)
+    if ax is None:
+        _, ax = plt.subplots()
 
     ax.set_aspect('equal')
     cnt = ax.contourf(x, y, z, **contourf_kwargs)
