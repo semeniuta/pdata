@@ -84,18 +84,6 @@ def plot_frozen_distrib(x0, x1, distrib, linspace_num=200, fill_alpha=0.4, **plo
     plt.fill_between(x, y, **fb_kvargs)
 
 
-def handle_fig_and_ax(fig, subplot_pos, projection=None):
-
-    if fig is None:
-        fig = plt.figure()
-
-    if subplot_pos is None:
-        ax = plt.axes(projection=projection)
-    else:
-        ax = fig.add_subplot(subplot_pos, projection=projection)
-
-    return fig, ax
-
 
 def plot_surface(x, y, z, ax=None, **surface_kwargs):
 
