@@ -114,7 +114,7 @@ def plot_contour(x, y, z, fig=None, subplot_pos=None, **contourf_kwargs):
 
     ax.set_aspect('equal')
     cnt = ax.contourf(x, y, z, **contourf_kwargs)
-    fig.colorbar(cnt, ax=ax)
+    plt.colorbar(cnt, ax=ax)
 
 
 def plot_grad_as_vector_field(x_range, y_range, U, V, fig=None, subplot_pos=None, **quiver_kwargs):
