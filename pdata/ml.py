@@ -28,6 +28,10 @@ def cross_val_for_estimators(estimators, X, y, **cross_val_score_kwargs):
 
 
 def prepare_Xy(X_1, X_0):
+    """
+    Prepare (X, y) dataset for the binary
+    classification problem (response is either 0 or 1)
+    """
 
     n1 = len(X_1)
     n0 = len(X_0)
