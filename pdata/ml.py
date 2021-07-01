@@ -110,6 +110,18 @@ def gather_best_hyperparams(gscv):
 
 
 def gather_best_scores_for_all_gscv(gscv_res):
+    """
+    Summarize the results of run_gscv with the focus on
+    the best scores for each estimator. 
+
+    The result is a dataframe with its index
+    corresponding to the keys of gscv_res and 
+    the following columns:
+     - best_score
+     - n_with_best (number of cases with the best score)
+     - grid_size
+     - share_with_best (= n_with_best / grid_size)
+    """
 
     def count_n_with_best(gscv):
         return np.sum(gscv.cv_results_['mean_test_score'] == gscv.best_score_)
