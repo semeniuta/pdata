@@ -97,9 +97,10 @@ def handle_fig_and_ax(fig, subplot_pos, projection=None):
     return fig, ax
 
 
-def plot_surface(x, y, z, fig=None, subplot_pos=None, **surface_kwargs):
+def plot_surface(x, y, z, ax=None, **surface_kwargs):
 
-    fig, ax = handle_fig_and_ax(fig, subplot_pos, projection='3d')
+    if ax is None:
+        _, ax = plt.subplots(subplot_kw={'projection': '3d'})
 
     ax.plot_surface(x, y, z, **surface_kwargs)
 
