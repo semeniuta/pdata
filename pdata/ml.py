@@ -144,6 +144,20 @@ def gather_best_scores_for_all_gscv(gscv_res):
 
 
 class MLData:
+    """
+    A container for managing unsplitted data for 
+    machine learning, as well as its tranformations
+    (scaling with StandardScaler and PCA).
+
+    It is presumed that the original data
+    is supplied as a Pandas dataframe. 
+
+    After the object is created, the following 
+    fields become available:
+     - X (the original dataset, dataframe)
+     - X_scaled (the scaled dataset, dataframe)
+     - X_pca (PCA-transformed dataset, ndarray)
+    """
 
     def __init__(self, df, pca_n_components=2):
 
@@ -158,6 +172,14 @@ class MLData:
         self.X_pca = self._pca.transform(self.X_scaled)
 
     def summarize_importances(self, importances):
+        """
+        Summarize feature importances as a Pandas series
+        given the importances vector such as feature_importances_
+        in the tree-based models.
+
+        The resulting series is sorted from the most important 
+        to the least important feature.
+        """
 
         d = dict(zip(self.X.columns, importances))
         return pd.Series(d).sort_values(ascending=False)
