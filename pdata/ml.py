@@ -16,6 +16,16 @@ def get_model_name(estimator):
 
 
 def cross_val_for_estimators(estimators, X, y, **cross_val_score_kwargs):
+    """
+    Run cross-validation on a set of estimators 
+    and the (X, y) dataset.
+
+    Return the result as a Pandas dataframe in which each row
+    corresponds to the respective estimator (indexed 0, 1, ..., n - 1),
+    and the columns comprise a set of fold_1, fold_2, ..., fold_n,
+    and cv_score_mean (mean value across all folds for the given 
+    esimator).
+    """
 
     cv_scores = []
     for est in estimators:
