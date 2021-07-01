@@ -92,6 +92,15 @@ def run_gscv(X_shuffled, y_shuffled, setup, score_func=None):
 
 
 def gather_best_hyperparams(gscv):
+    """
+    Given a fit GridSearchCV object (gscv),
+    summarize the cases (one or more)
+    resulting in the highest score. 
+
+    The result is returned as a Pandas dataframe 
+    with one or more rows, and columns corresponding 
+    to the 'params' keys of gscv.cv_results_
+    """
 
     mask = gscv.cv_results_['mean_test_score'] == gscv.best_score_
     indices = np.argwhere(mask).reshape(-1)
