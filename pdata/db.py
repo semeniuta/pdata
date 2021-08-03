@@ -16,6 +16,13 @@ def create_mysql_engine(host, user, password, db):
     return create_engine(conn_str, echo=False)
 
 
+def create_sqlite_engine(db_path):
+
+    conn_str = f'sqlite:///{db_path}'
+
+    return create_engine(conn_str, echo=False)
+
+
 def read_sql_with_elapsed_time(query, conn):
 
     t0 = time.perf_counter()
