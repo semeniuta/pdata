@@ -106,3 +106,17 @@ def pd_cols_with_identical_values(df):
             res[colname] = first_val
 
     return res
+
+
+def pd_rolling_mean(series, window_size):
+    """
+    Compute rolling mean on a Series 
+    with the given window_size
+    and return only non-None rows,
+    i.e. starning from row number window_size - 1
+    and until the end. 
+    """
+    
+    rolling_mean = series.rolling(window_size).mean()
+    
+    return rolling_mean[window_size - 1:]
