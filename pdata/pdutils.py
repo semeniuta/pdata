@@ -120,3 +120,14 @@ def pd_rolling_mean(series, window_size):
     rolling_mean = series.rolling(window_size).mean()
     
     return rolling_mean[window_size - 1:]
+
+
+def pd_custom_index_for_series(series, new_index):
+    """
+    Create a new Series from the existing one
+    by setting a new index.
+    """
+    
+    x = np.array(series)
+
+    return pd.Series(x, index=np.array(new_index))
